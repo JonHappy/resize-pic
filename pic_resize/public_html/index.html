@@ -25,6 +25,12 @@
                 padding-left: 3px;
                 vertical-align: bottom;
             }
+            #right_mark{
+                cursor: ew-resize;
+            }
+            #bottom_mark{
+                cursor: ns-resize;
+            }
         </style>
     </head>
     <div id="div1">
@@ -91,6 +97,7 @@
             };
             document.querySelector('#w_crop').innerHTML = crop.width;
             document.querySelector('#h_crop').innerHTML = crop.height;
+
             var Cy = $('#div1').height() / 2;
             var Cx = $('#div1').width() / 2;
             $('#crop').css({
@@ -269,7 +276,7 @@
 //                    }
 //                });
                 $('#v_line').css({
-                    left: $('#crop').width() / 2,
+                    left: $('#crop').width() / 2+1,
                     top: 0
                 });
                 $('#mark').css({
@@ -421,6 +428,50 @@
                 set_css_img();
             });
 
+            $('#bottom_mark').mousewheel(function (event, delta) {
+                var x = delta > 0 ? 1 : -1;
+                var xx = parseInt(document.getElementById('mark_b').style.top) - x;
+                if ((crop.height > 0 || x > 0) && (crop.height < 700 || x < 0))
+                {
+                    document.getElementById('mark_b').style.top = xx + 'px';
+                }
+
+                crop.height = 2 * (Cy - parseInt(document.getElementById('mark_b').style.top)) - 2;
+                $('#crop').css({
+                    height: crop.height,
+                    width: crop.width,
+                    left: Cx - crop.width / 2 - 1,
+                    top: Cy - crop.height / 2 - 1
+                });
+                $('#h_line').css({
+                    top: document.getElementById('mark_b').style.top,
+                    left: 0
+                });
+                document.querySelector('#h_crop').innerHTML = crop.height;
+            });
+
+
+            $('#right_mark').mousewheel(function (event, delta) {
+                var x = delta > 0 ? 1 : -1;
+                var xx = parseInt(document.getElementById('mark').style.left) + x;
+                if ((crop.width > 0 || x > 0) && (crop.width < 700 || x < 0))
+                {
+                    document.getElementById('mark').style.left = xx + 'px';
+                }
+                crop.width = 2 * ( parseInt(document.getElementById('mark').style.left) ) - 2;
+                $('#crop').css({
+                    height: crop.height,
+                    width: crop.width,
+                    left: Cx - crop.width / 2 - 1,
+                    top: Cy - crop.height / 2 - 1
+                });
+                $('#v_line').css({
+                    left: document.getElementById('mark').style.left,
+                    top: 0
+                });
+                document.querySelector('#w_crop').innerHTML = crop.width;
+            });
+
 //        -- загрузка файла --
             var fb = [];
             var work;
@@ -519,9 +570,9 @@
                     {
 //                        window.close();
                         console.log('eeeeeee');
-                        document.getElementById('img').src='';
-                        document.getElementById('name_file').innerHTML='';
-                        document.getElementById('file').value=null;
+                        document.getElementById('img').src = '';
+                        document.getElementById('name_file').innerHTML = '';
+                        document.getElementById('file').value = null;
                     }
                     return n;
                 };
