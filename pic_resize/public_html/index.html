@@ -15,8 +15,16 @@
         <!--</script> http://webext.ru/fix-mousewheel/-->
         <link href="CSS/pic.css" rel="stylesheet" type="text/css"/>
         <style>
-            #label_h{margin-left: 20px;}
-            #label_w{margin-left: 20px;}
+            #label_h{margin-left: 4px;}
+            #label_w{margin-left: 4px;}
+            #name_file{
+                width: 139px;
+                /*background: aquamarine;*/
+                height: 18px;
+                display: inline-block;
+                padding-left: 3px;
+                vertical-align: bottom;
+            }
         </style>
     </head>
     <div id="div1">
@@ -32,6 +40,7 @@
     <div id="bottom_mark"><div id="mark_b"></div></div>
     <div id="size_mark"><div id="mark_s"></div></div>
     <input type="file" id="file" multiple accept="image/jpeg">
+    <div id="name_file"></div>
     <button id="crop_button"  disabled="">обрезать</button>
     <!--<button id="c1">full/preview</button>-->
     <button id="c2"><span>x</span>/<span>xx</span></button>
@@ -465,6 +474,7 @@
                         document.getElementById('crop_button').removeAttribute('disabled');
                         var pic = new Image();
                         pic.onload = function () {
+                            document.querySelector('#name_file').innerHTML = n + ' ' + file.name;
                             console.timeEnd('запись');
                             console.time('показ');
                             el_img.setAttribute('src', pic.src);
@@ -507,7 +517,11 @@
                     }
                     else
                     {
-                        window.close();
+//                        window.close();
+                        console.log('eeeeeee');
+                        document.getElementById('img').src='';
+                        document.getElementById('name_file').innerHTML='';
+                        document.getElementById('file').value=null;
                     }
                     return n;
                 };

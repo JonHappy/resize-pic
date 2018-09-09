@@ -155,7 +155,7 @@ button#arrow_v{
 }
 
 #arrow_v{
-    margin-left: 63px;
+    margin-left: 6px;
     background-image: url(../pic/arrow_v_green.png) ;
 }
 #arrow_h{
@@ -172,4 +172,8 @@ button#arrow_v{
     outline: none;
     vertical-align: bottom;
     text-align: center;
+}
+
+#file{
+    width: 236px;
 }
