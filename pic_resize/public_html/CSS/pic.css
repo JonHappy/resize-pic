@@ -7,24 +7,32 @@ button#arrow_v{
 
 #div1{
     position: absolute;
-    top: 10px;
-    left: 50px;
-    width: 700px;
-    height: 700px;
+    top: var(--pix_max_top);
+    left: var(--pix_max_left);
+    width: var(--pix_max_width);
+    height: var(--pix_max_height);
     border: 1px solid #c0c0c0;
     box-sizing: border-box;
     overflow: hidden;
 }
-#div1 img{
-    position: relative;
-}
 
-#rotate{
-    background: #ffffff;
-    z-index: 10;
-    height: 694px;
-    width: 30px;
-    -webkit-appearance: slider-vertical;
+#v_line{
+    border: none;
+    background-color: red;
+    color: red;
+    height: 1px;
+    z-index: 401;
+    width: var(--pix_max_height);
+    transform: rotate(90deg) translateX(50%);
+    position: absolute;
+    left: calc(var(--Cx) - var(--pix_max_height) / 2  + var(--crop_width) / 2 - 1px);
+    margin: 0px;
+    top: 0;
+    -webkit-margin-before: 1px;
+    -webkit-margin-after: 1px;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+    cursor:pointer
 }
 
 #crop{
@@ -33,7 +41,20 @@ button#arrow_v{
     position: absolute;
     border: 1px #000000 solid;
     z-index: 400;
+    box-sizing:border-box;
+    left: calc(var(--Cx) - (var(--crop_width) / 2) - 1px);
+    top: calc(var(--Cy) - (var(--crop_height) / 2) - 1px);
+    width: var(--crop_width);
+    height: var(--crop_height);
 }
+
+#div1 img{
+    position: relative;
+}
+
+
+
+
 
 #crop>div{
     pointer-events:none;
@@ -45,40 +66,25 @@ button#arrow_v{
     z-index: 399;margin:-1px;
 }
 
-#v_line{
-    border: none;
-    background-color: red;
-    color: red;
-    height: 1px;
-    z-index: 401;
-    width: 100%;
-    transform: rotate(90deg) translateX(50%);
-    position: relative;
-    margin: 0px;
-    -webkit-margin-before: 1px;
-    -webkit-margin-after: 1px;
-    -webkit-margin-start: auto;
-    -webkit-margin-end: auto;
-    cursor:pointer
-}
 
-.cropped{
+
+#cropped{
     position: absolute;
-    top:10px;
-    left: 778px;
-    width: calc(100% - 770px);
+    top: 10px;
+    left: calc( var(--pix_max_left) + var(--pix_max_width) + 30px);
+    /* width: calc(100% - 770px); */
     display: inline-flex;
     flex-direction: column;
     flex: 1 1 auto;
 }
 
-.cropped div{
+#cropped div{
     align-self: flex-start;
     position: relative;
     left: 6px;
 }
 
-.cropped img{
+#cropped img{
     max-width: 100%;
     align-self: flex-start;
     padding-bottom: 10px;
@@ -91,38 +97,45 @@ button#arrow_v{
 }
 
 #right_mark{
-    /* position: absolute; */
+    position: absolute;
     border: 1px solid #c0c0c0;
-
-    margin-left: 386px;
-    width: 358px;
+    margin-left: calc((var(--pix_max_width) / 2) + 34px);
+    width: calc((var(--pix_max_width) / 2 ) + 14px);
     margin-bottom: 5px;
+    top: calc(var(--pix_max_height) + var(--pix_max_top) );
+    cursor: ew-resize;
 }
 
 #mark{
-    height: 10px;
-    width: 10px;
+    height: 14px;
+    width: 14px;
     background: #cd0a0a;
     cursor:pointer;
     border: outset 2px;
+    left: calc(var(--crop_width) / 2 );
+    position: relative;
+    box-sizing: border-box;
 }
 
 #bottom_mark{
-    /* background: blue; */
-    height: 360px;
-    /*width: 6px;*/
+    /*background: blue; */
+    height: calc(var(--Cy) + 14px);
+    /* width: 31px; */
     position: absolute;
-    top: 6px;
-    left: 749px;
-    border:  solid 1px #d0d0d0;
+    top: 4px;
+    left: calc(var(--pix_max_left) + var(--pix_max_width) );
+    border-bottom: solid 1px #d0d0d0;
 }
 
 #bottom_mark div{
-    height: 10px;
-    width: 10px;
+    height: 14px;
+    width: 14px;
     background: #cd0a0a;
     cursor: pointer;
     border: outset 2px;
+    top: calc(var(--Cy) - var(--crop_height) / 2 );
+    position: relative;
+    box-sizing: border-box;
 }
 
 #h_line{
@@ -135,23 +148,25 @@ button#arrow_v{
     position: absolute;
     cursor:pointer;
     margin: 0;
+    top: calc(var(--Cy) - var(--crop_height) / 2 - 1px);
 }
 
 #size_mark{
     background: aquamarine;
     position: absolute;
-    top: 10px;
-    left: 766px;
-    height: 700px;
+    top: 7px;
+    left: calc( var(--pix_max_left) + var(--pix_max_width) + 14px);
+    height: calc(var(--pix_max_height) + 14px);
 }
 
 #mark_s{
-    height: 12px;
-    width: 8px;
-    top: 345px;
+    height: 14px;
+    width: 14px;
+    top: calc(var(--Cy) + 7px);
     background: red;
     border: outset 2px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 #arrow_v{
@@ -175,5 +190,5 @@ button#arrow_v{
 }
 
 #file{
-    width: 236px;
+    width: 100%;
 }
